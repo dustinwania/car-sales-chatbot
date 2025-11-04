@@ -47,7 +47,7 @@ export default function Chat() {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-[#0B0F19] bg-gradient-to-b from-[#0B0F19] via-[#0C1324] to-[#0B0F19] text-gray-200 p-6">
-      <h1 className="text-4xl font-bold text-white mb-8 text-center drop-shadow-[0_0_10px_rgba(56,189,248,0.6)]">Car Sales Chatbot</h1>
+      <h1 className="text-4xl font-bold text-white mb-8 text-center drop-shadow-[0_0_10px_rgba(56,189,248,0.6)]">Car Sales Chatbot 🚘</h1>
       <div className="relative w-full max-w-3xl bg-[#0D1220]/70 backdrop-blur-xl border border-sky-500/20 shadow-[0_0_40px_-12px_rgba(56,189,248,0.5)] rounded-2xl flex flex-col h-[80vh]">
         <div className="flex-1 overflow-y-auto p-6 space-y-5">
           {messages.map((msg, i) => (
@@ -65,11 +65,11 @@ export default function Chat() {
                   <p className="leading-relaxed">{msg.content}</p>
 
                   {msg.cars && msg.cars.length > 0 && (
-                    <div className="mt-4 grid gap-3">
+                    <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                       {msg.cars.map((car, idx) => (
                         <div key={idx} className="rounded-lg border border-sky-500/25 bg-[#0C1424] p-3 shadow-[0_0_24px_-10px_rgba(56,189,248,0.35)] hover:border-sky-400/40 hover:shadow-[0_0_34px_-10px_rgba(56,189,248,0.5)] transition">
                           <p className="font-semibold text-gray-100">
-                            {car.manufacturer} {car.model} ({car.year})
+                            {car.manufacturer} {car.model} ({car.year}) 🚗
                           </p>
                           <p className="text-sm text-gray-300">Engine: {car.engine} | Fuel: {car.fuel}</p>
                           <p className="text-sm text-gray-300">Mileage: {car.mileage} | Price: ₱{car.price.toLocaleString()}</p>
@@ -115,6 +115,19 @@ export default function Chat() {
           </div>
         </form>
       </div>
+      <footer className="w-full max-w-3xl text-center mt-6 text-gray-400 text-sm">
+        <p>Developed by Dustin W.</p>
+        <p>
+          <a
+            href="https://github.com/jirosmokes/car-sales-chatbot"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sky-400 hover:underline"
+          >
+            GitHub Repository
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }

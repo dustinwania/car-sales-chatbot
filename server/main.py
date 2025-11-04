@@ -39,7 +39,7 @@ def ask_car_bot(q: Question):
             return {"reply": [], "message": "Sorry, I don't have info on that car."}
 
         results = []
-        for _, car in matches.head(5).iterrows():
+        for _, car in matches.head(9).iterrows():
             results.append({
                 "manufacturer": car["Manufacturer"],
                 "model": car["Model"],
@@ -47,7 +47,7 @@ def ask_car_bot(q: Question):
                 "fuel": car["Fuel type"],
                 "engine": car["Engine size"],
                 "mileage": car["Mileage"],
-                "price": car["Price"]
+                "price": car["Price"] * 80
             })
 
         return {"reply": results, "message": "Here are the cars I found:"}
