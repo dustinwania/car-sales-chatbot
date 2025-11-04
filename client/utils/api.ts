@@ -13,14 +13,28 @@ export interface AskCarBotResponse {
   reply: Car[];
 }
 
-export async function askCarBot(question: string): Promise<AskCarBotResponse> {
-  const res = await fetch("http://localhost:8000/ask", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ question }),
-  });
+const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.LOCAL_API_URL;
 
-  return res.json();
+export async function askCarBot(question: string): Promise<AskCarBotResponse> {
+  try {
+    const res = await fetch(`${API_URL}/ask`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ question }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`Server responded with ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error contacting car bot API:", error);
+    return {
+      message: "Something went wrong while contacting the server.",
+      reply: [],
+    };
+  }
 }
